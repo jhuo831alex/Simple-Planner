@@ -6,7 +6,6 @@ class Event:
         self.priority = priority
         self.notes = notes
 
-<<<<<<< HEAD
     def modify_item(self,new_item=None):
         question=input('Do you want to modify your item?')
         if question in ['y','yes','Y','Yes']:
@@ -15,7 +14,3 @@ class Event:
             self.item = new_item
      
         
-         
-=======
-    
->>>>>>> e7619f81e601c11db6a1ce3b3099656869aceb8e
