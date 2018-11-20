@@ -23,6 +23,12 @@ class Event:
             print_result += print_attr['PURPLE'] + self.priority + print_attr['END'] + ' '
         print_result += print_attr['BOLD']+ print_attr['DARKCYAN'] + self.item + print_attr['END'] +'\n'
 
+        print_result = ''
+        if self.priority:
+            print_result += print_attr['PURPLE'] + self.priority + print_attr['END'] + ' '
+        print_result += print_attr['BOLD']+ print_attr['CYAN'] + self.item + print_attr['END'] +'\n'
+
+
         if self.remind_time:
             if datetime.datetime.now() > self.remind_time:
                 print_result += print_attr['RED'] + str(self.remind_time) + print_attr['END'] + "\n"
@@ -34,6 +40,7 @@ class Event:
  
         return print_result
         
+
     # def modify_notes(self,new_item = None, new_remind_time = None, new_priority=None, new_notes=None):
     #     question=input('Do you want to modify your event?')
     #     if question in ['y','yes','Y','Yes']:
@@ -51,3 +58,22 @@ class Event:
     #             else if feature == 'notes':
     #                 new_notes = input('What is your new notes?')
     #                 self.notes = new_notes
+
+    def modify_notes(self,new_item = None, new_remind_time = None, new_priority=None, new_notes=None):
+        question=input('Do you want to modify your event?')
+        if question in ['y','yes','Y','Yes']:
+            features = input('What features of this event do you want to change? (Please enter: item, remind_time, priority, or notes)').split()
+            for feature in features:
+                if feature == 'item':
+                    new_item = input('What is your new item?')
+                    self.item = new_item
+                else if feature == 'remind_time':
+                    new_remind_time = input('What is your new remind time?')
+                    self.remind_time = new_remind_time
+                else if feature == 'priority':
+                    new_priority = input('What is your new priority?')
+                    self.priority = new_priority
+                else if feature == 'notes':
+                    new_notes = input('What is your new notes?')
+                    self.notes = new_notes
+
