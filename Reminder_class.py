@@ -4,6 +4,17 @@ class Reminder:
         self.category = category
         self.event_list = event_list
 
+    def __repr__(self):
+        print_str = ''
+        print_str += '\033[1m' + self.category + '\033[0m' + '\n\n'
+        count = 1
+
+        for event in self.event_list:
+            print_str += '----------[' + str(count) + "]----------\n"
+            print_str += str(event) + '\n\n'
+            count += 1
+        return print_str
+
     #methods
     def prompt_user(self,prompt_msg):
         input_ = input(prompt_msg)
@@ -19,7 +30,6 @@ class Reminder:
         from Event_class import Event
 
         item_ = input('What reminder would you like to add?')
-
 
         if_remind = self.prompt_user('Would you like to be reminded on a day? (y/n)')
         if if_remind:
