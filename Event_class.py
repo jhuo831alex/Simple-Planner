@@ -19,3 +19,10 @@ class Event:
             question = True
             new_remind_time = input('What is your new remind time?')
             self.remind_time = new_remind_time
+    
+    def modify_priority(self,new_priority=None):
+        question=input('Do you want to modify your priority?')
+        if question in ['y','yes','Y','Yes']:
+            question = True
+            new_priority = input('What is your new priority?')
+            self.priority = new_priority 
