@@ -2,10 +2,8 @@ class Reminder:
     
     def __init__(self,category = "Reminder", event_list = list()):
         self.category = category
-<<<<<<< HEAD
 
     def modify
-=======
         self.event_list = event_list
 
     #methods
@@ -31,4 +29,3 @@ class Reminder:
         self.event_list.append(event)
 
     def check_event(self):
->>>>>>> f50545809c9f1682c25ab6e5d251c878763d06ac
