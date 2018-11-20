@@ -22,9 +22,6 @@ class Reminder:
 
 
         if_remind = self.prompt_user('Would you like to be reminded on a day? (y/n)')
-        if_priority = self.prompt_user('Would you like to set a priority? (y/n)')
-        if_notes = self.prompt_user('Would you like to add notes? (y/n)')
-
         if if_remind:
             while True:
                 date_string = input('What time would you like to be reminded? (ex: 05/01/2018 23:01)')
@@ -35,7 +32,8 @@ class Reminder:
                     print('Invalid date format. Please refer to example.')
         else:
             date_time = None
-        
+
+        if_priority = self.prompt_user('Would you like to set a priority? (y/n)')
         if if_priority:
             while True:
                 priority_string = input('Which priority level would you like to assign to this event? (*/**/***)')
@@ -45,7 +43,8 @@ class Reminder:
                     print('Invalid priority level. Please refer to example.')
         else:
             priority_string = None
-        
+
+        if_notes = self.prompt_user('Would you like to add notes? (y/n)')
         if if_notes:
             notes = input("What notes would you like to add to this event?")
         else:
