@@ -6,3 +6,12 @@ class Event:
         self.priority = priority
         self.notes = notes
 
+    def modify_item(self,new_item=None):
+        question=input('Do you want to modify your item?')
+        if question in ['y','yes','Y','Yes']:
+            question = True
+            new_item = input('What is your new item?')
+            self.item = new_item
+     
+        
+         
