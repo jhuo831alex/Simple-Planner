@@ -6,3 +6,4 @@ class Event:
         self.priority = priority
         self.notes = notes
 
+    
