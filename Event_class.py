@@ -18,28 +18,27 @@ class Event:
                       'BOLD': '\033[1m',
                       'UNDERLINE': '\033[4m',
                       'END': '\033[0m'}
-        print_result = ''
-        if self.priority:
-            print_result += print_attr['PURPLE'] + self.priority + print_attr['END'] + ' '
-        print_result += print_attr['BOLD']+ print_attr['DARKCYAN'] + self.item + print_attr['END'] +'\n'
 
         print_result = ''
         if self.priority:
             print_result += print_attr['PURPLE'] + self.priority + print_attr['END'] + ' '
-        print_result += print_attr['BOLD']+ print_attr['CYAN'] + self.item + print_attr['END'] +'\n'
-
+        print_result += print_attr['BOLD']+ print_attr['DARKCYAN'] + self.item + print_attr['END']
 
         if self.remind_time:
             if datetime.datetime.now() > self.remind_time:
-                print_result += print_attr['RED'] + str(self.remind_time) + print_attr['END'] + "\n"
+                print_result += '\n' + print_attr['RED'] + str(self.remind_time) + print_attr['END'] 
             else:
-                print_result += self.remind_time + "\n"
+                print_result += '\n' + str(self.remind_time)
         
         if self.notes:
-            print_result += print_attr['UNDERLINE'] + self.notes + print_attr['END']
+            print_result += '\n' + print_attr['UNDERLINE'] + self.notes + print_attr['END']
  
         return print_result
+
+    def __str__(self):
+        return self.__repr__()
         
+
 
     # def modify_notes(self,new_item = None, new_remind_time = None, new_priority=None, new_notes=None):
     #     question=input('Do you want to modify your event?')
@@ -58,22 +57,3 @@ class Event:
     #             else if feature == 'notes':
     #                 new_notes = input('What is your new notes?')
     #                 self.notes = new_notes
-
-    def modify_notes(self,new_item = None, new_remind_time = None, new_priority=None, new_notes=None):
-        question=input('Do you want to modify your event?')
-        if question in ['y','yes','Y','Yes']:
-            features = input('What features of this event do you want to change? (Please enter: item, remind_time, priority, or notes)').split()
-            for feature in features:
-                if feature == 'item':
-                    new_item = input('What is your new item?')
-                    self.item = new_item
-                else if feature == 'remind_time':
-                    new_remind_time = input('What is your new remind time?')
-                    self.remind_time = new_remind_time
-                else if feature == 'priority':
-                    new_priority = input('What is your new priority?')
-                    self.priority = new_priority
-                else if feature == 'notes':
-                    new_notes = input('What is your new notes?')
-                    self.notes = new_notes
-

@@ -4,6 +4,17 @@ class Reminder:
         self.category = category
         self.event_list = event_list
 
+    def __repr__(self):
+        print_str = ''
+        print_str += '\033[1m' + self.category + '\033[0m' + '\n\n'
+        count = 1
+
+        for event in self.event_list:
+            print_str += '----------[' + str(count) + "]----------\n"
+            print_str += str(event) + '\n\n'
+            count += 1
+        return print_str
+
     #methods
     def prompt_user(self,prompt_msg):
         input_ = input(prompt_msg)
@@ -18,8 +29,7 @@ class Reminder:
         from datetime import datetime
         from Event_class import Event
 
-        item_ = input('What reminder would you like to add?')
-
+        item_ = input('What task would you like to add?')
 
         if_remind = self.prompt_user('Would you like to be reminded on a day? (y/n)')
         if if_remind:
@@ -36,7 +46,7 @@ class Reminder:
         if_priority = self.prompt_user('Would you like to set a priority? (y/n)')
         if if_priority:
             while True:
-                priority_string = input('Which priority level would you like to assign to this event? (*/**/***)')
+                priority_string = input('Which priority level would you like to assign to this task? (*/**/***)')
                 if priority_string in ['*','**','***']:
                     break
                 else:
@@ -46,7 +56,7 @@ class Reminder:
 
         if_notes = self.prompt_user('Would you like to add notes? (y/n)')
         if if_notes:
-            notes = input("What notes would you like to add to this event?")
+            notes = input("What notes would you like to add to this task?")
         else:
             notes = None
         
@@ -54,4 +64,15 @@ class Reminder:
         self.event_list.append(new_event)
 
     def check_event(self):
-        pass
+        print(self.__repr__())
+        while True:
+            item_to_delete = input("Which task did you complete? (Input task number)")
+            try:
+                self.event_list.pop(int(item_to_delete)-1)
+                break
+            except:
+                print('Invalid task number. Please refer to example.')
+
+
+        
+            
