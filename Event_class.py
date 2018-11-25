@@ -71,12 +71,12 @@ class Event:
             if new_priority == '':
                 self.priority = None
                 break
-            try:
-                new_priority in ['*','**','***']
+            elif new_priority in ['*','**','***']:
                 self.priority = new_priority
                 break
-            except:
+            else:
                 print('Invalid priority format. Please refer to example.')
+
 
     def modify_notes(self,new_notes=None):
         new_notes = input('What is your new notes?')
