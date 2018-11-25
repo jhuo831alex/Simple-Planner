@@ -36,41 +36,31 @@ class ReminderGUI:
         self.frame = ttk.Frame(master)
         self.frame.pack()
 
-<<<<<<< HEAD
-        ttk.Button(self.frame, text = 'Add Task',command = self.add_task).grid(row = 0, column = 1, padx = 5, pady = 5)
-        #ttk.Button(self.frame, text = 'Print Reminder',command = self.print_reminder).grid(row = 1, column = 1, padx = 5, pady = 5)
-        for i in range(len(self.event_list)):
-            label = ttk.Label(self.frame, text= str(self.event_list[i]))
-            label.grid(row=2+i,column=1)
 
-=======
-        ttk.Button(self.frame, text = 'Add Task',command = self.add_task).grid(row = 0, column = 0, padx = 5, pady = 5)
-        ttk.Button(self.frame, text = 'Print Reminder',command = self.print_reminder).grid(row = 0, column = 0, padx = 5, pady = 5)
-        #Entry(self.frame).grid(row=0,column=0,padx = 5, pady = 5)
->>>>>>> 4d0e49d89451b56a7360fd8f7cb7000ba5b6fecb
+        ttk.Label(self.frame,text='Task Name').grid(row = 0, column = 0, pady = 5,sticky=W)
+        self.task_name = ttk.Entry(self.frame)
+        self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W)
+        ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
 
-    def add_task(self):
-        new_event = Event('yes')
-        self.event_list.append(new_event)
-<<<<<<< HEAD
-    
-    # def print_reminder(self):
-    #     for i in range(len(self.event_list)):
-            
 
-    #         label = ttk.Label(self.frame, text= str(self.event_list[i]))
-    #         label.grid(row=2+i,column=1)
-=======
+        #ttk.Button(self.frame, text = 'Add Task',command = self.add_task).grid(row = len(self.event_list)+1, column = 0, padx = 5, pady = 5)
+
+
+
+    # def add_task(self):
+    #     new_event = Event(task_name.get())
+    #     self.event_list.append(new_event)
+
         
-
-    def print_reminder(self):
+    def update_reminder(self):
+        new_event = Event(self.task_name.get())
+        self.task_name.delete(0,END)
+        self.event_list.append(new_event)
         for i in range(len(self.event_list)):
             var = IntVar()
-            Checkbutton(self.frame,text=str(self.event_list[i]),variable = var).grid(row=2+i,column=0)
-            # label = ttk.Label(self.frame, text= str(self.event_list[i]))
-            # # this creates x as a new label to the GUI
-            # label.grid(row=2+i,column=0)
->>>>>>> 4d0e49d89451b56a7360fd8f7cb7000ba5b6fecb
+            Checkbutton(self.frame,text=str(self.event_list[i]),variable = var,).grid(row=i+2,column=0,sticky=W,columnspan=2)
+ 
+
         
 
 
