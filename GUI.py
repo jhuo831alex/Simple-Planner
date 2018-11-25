@@ -30,29 +30,38 @@ class ReminderGUI:
 
     def __init__(self,master):
         self.event_list = list()
+        self.button_lst = list()
 
         master.title('Simple Reminder')
 
         self.frame = ttk.Frame(master)
         self.frame.pack()
 
-        ttk.Button(self.frame, text = 'Add Task',command = self.add_task).grid(row = 0, column = 0, padx = 5, pady = 5)
-        ttk.Button(self.frame, text = 'Print Reminder',command = self.print_reminder).grid(row = 1, column = 0, padx = 5, pady = 5)
+        ttk.Label(self.frame,text='Task Name').grid(row = 0, column = 0, pady = 5,sticky=W)
+        self.task_name = ttk.Entry(self.frame)
+        self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W)
+        ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
 
 
-    def add_task(self):
-        new_event = Event('yes')
-        self.event_list.append(new_event)
-    
-    def print_reminder(self):
-        for i in range(len(self.event_list)):
-            label = ttk.Label(self.frame, text= str(self.event_list[i]))
-            # this creates x as a new label to the GUI
-            label.grid(row=2+i,column=0)
+    def removeCheckButton(self,button_num):
+        self.button_lst[button_num].destroy()
+
         
+    def update_reminder(self):
+        new_event = Event(self.task_name.get())
+        self.task_name.delete(0,END)
+        self.event_list.append(new_event)
+        n = len(self.event_list)
+        var = IntVar()
 
+        check = Checkbutton(self.frame,
+                    text=self.event_list[n-1],
+                    variable=self.event_list[n-1],
+                    command=lambda ni=n-1: self.removeCheckButton(ni))
+        
+        check.grid(row=n+2,column=0,sticky=W,columnspan=2)
+        self.button_lst.append(check)
 
-              
 root = Tk()
 reminder_gui = ReminderGUI(root)
 root.mainloop()

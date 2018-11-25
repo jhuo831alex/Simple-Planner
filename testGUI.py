@@ -1,16 +1,22 @@
-from tkinter import *
+import tkinter as tk
 
-def printSomething():
-    # if you want the button to disappear:
-    # button.destroy() or button.pack_forget()
-    for x in range(9): # 0 is unnecessary
-        label = Label(root, text= str(x))
-    # this creates x as a new label to the GUI
-        label.pack() 
+def cbc(id, tex):
+    return lambda : callback(id, tex)
 
-root = Tk()
+def callback(id, tex):
+    s = 'At {} f is {}\n'.format(id, id**id/0.987)
+    tex.insert(tk.END, s)
+    tex.see(tk.END)             # Scroll if necessary
 
-button = Button(root, text="Print Me", command=printSomething) 
-button.pack()
+top = tk.Tk()
+tex = tk.Text(master=top)
+tex.pack(side=tk.RIGHT)
+bop = tk.Frame()
+bop.pack(side=tk.LEFT)
+for k in range(1,10):
+    tv = 'Say {}'.format(k)
+    b = tk.Button(bop, text=tv, command=cbc(k, tex))
+    b.pack()
 
-root.mainloop()
+tk.Button(bop, text='Exit', command=top.destroy).pack()
+top.mainloop()
