@@ -40,8 +40,14 @@ class Event:
 
 
     def modify_item(self,new_item=None):
-        new_item = input('What is your new item?')
-        self.item = new_item
+        while True:
+            new_item = input('What is your new item?')
+            if new_item != '':
+                self.item = new_item
+                break
+            else:
+                print('You must enter your new_item')
+
 
     def modify_remind_time(self,new_remind_time=None):
         import datetime
@@ -60,14 +66,26 @@ class Event:
         
 
     def modify_priority(self,new_priority=None):
-        question=input('Do you want to modify your priority?')
-        new_priority = input('What is your new priority?')
-        self.priority = new_priority
+        while True:
+            new_priority = input('What is your new priority?(ex:*/**/***)
+            if new_priority == '':
+                self.priority = None
+                break
+            try:
+                new_priority in ['*','**','***']
+                self.priority = new_priority
+                break
+            except:
+                print('Invalid priority format. Please refer to example.')
 
     def modify_notes(self,new_notes=None):
-        question=input('Do you want to modify your notes?')
         new_notes = input('What is your new notes?')
-        self.notes = new_notes    
+        if new_notes == '':
+            self.notes = None
+        else:
+            self.notes = new_notes
+            
+            
 
     def modify(self):
         question=input('Do you want to modify your event?')
