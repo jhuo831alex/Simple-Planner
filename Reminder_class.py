@@ -64,9 +64,6 @@ class Reminder:
         self.event_list.append(new_event)
 
     def check_event(self):
-<<<<<<< HEAD
-        
-=======
         print(self.__repr__())
         while True:
             item_to_delete = input("Which task did you complete? (Input task number)")
@@ -75,8 +72,3 @@ class Reminder:
                 break
             except:
                 print('Invalid task number. Please refer to example.')
-
-
-        
-            
->>>>>>> 2bf1bedd016f34709cf1a7e8bb5aa5221ed18346
