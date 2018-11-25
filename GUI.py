@@ -36,19 +36,23 @@ class ReminderGUI:
         self.frame = ttk.Frame(master)
         self.frame.pack()
 
-        ttk.Button(self.frame, text = 'Add Task',command = self.add_task).grid(row = 0, column = 0, padx = 5, pady = 5)
-        ttk.Button(self.frame, text = 'Print Reminder',command = self.print_reminder).grid(row = 1, column = 0, padx = 5, pady = 5)
+        ttk.Button(self.frame, text = 'Add Task',command = self.add_task).grid(row = 0, column = 1, padx = 5, pady = 5)
+        #ttk.Button(self.frame, text = 'Print Reminder',command = self.print_reminder).grid(row = 1, column = 1, padx = 5, pady = 5)
+        for i in range(len(self.event_list)):
+            label = ttk.Label(self.frame, text= str(self.event_list[i]))
+            label.grid(row=2+i,column=1)
 
 
     def add_task(self):
         new_event = Event('yes')
         self.event_list.append(new_event)
     
-    def print_reminder(self):
-        for i in range(len(self.event_list)):
-            label = ttk.Label(self.frame, text= str(self.event_list[i]))
-            # this creates x as a new label to the GUI
-            label.grid(row=2+i,column=0)
+    # def print_reminder(self):
+    #     for i in range(len(self.event_list)):
+            
+
+    #         label = ttk.Label(self.frame, text= str(self.event_list[i]))
+    #         label.grid(row=2+i,column=1)
         
 
 
