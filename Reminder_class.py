@@ -64,4 +64,4 @@ class Reminder:
         self.event_list.append(new_event)
 
     def check_event(self):
-        pass
+        
