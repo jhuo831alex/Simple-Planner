@@ -67,7 +67,7 @@ class Event:
 
     def modify_priority(self,new_priority=None):
         while True:
-            new_priority = input('What is your new priority?(ex:*/**/***)
+            new_priority = input('What is your new priority?(ex:*/**/***)')
             if new_priority == '':
                 self.priority = None
                 break
@@ -93,39 +93,39 @@ class Event:
             while True:
                 change = input ('What feature would you like to change first?')
                 if change == 'item':
-                    modify_item()
+                    self.modify_item()
                     break
                 elif change == 'remind_time':
-                    modify_remind_time()
+                    self.modify_remind_time()
                     break
                 elif change == 'priority':
-                    modify_priority()
+                    self.modify_priority()
                     break
                 elif change == 'notes':
-                    modify_notes()
+                    self.modify_notes()
                     break
                 else:
                     print('Please enter the features with correct format: item, remind_time, priority, notes')
 
         while True:
-        question2=input('Do you want to modify other features of your event?')
-        if question2 in ['y','yes','Y','Yes']:
-            while True:
-                change = input ('What feature would you like to change?')
-                if change == 'item':
-                    modify_item()
-                    break
-                elif change == 'remind_time':
-                    modify_remind_time()
-                    break
-                elif change == 'priority':
-                    modify_priority()
-                    break
-                elif change == 'notes':
-                    modify_notes()
-                    break
-                else:
-                    print('Please enter the features with correct format: item, remind_time, priority, notes')
-        else:
-            break 
+            question2=input('Do you want to modify other features of your event?')
+            if question2 in ['y','yes','Y','Yes']:
+                while True:
+                    change = input ('What feature would you like to change?')
+                    if change == 'item':
+                        self.modify_item()
+                        break
+                    elif change == 'remind_time':
+                        self.modify_remind_time()
+                        break
+                    elif change == 'priority':
+                        self.modify_priority()
+                        break
+                    elif change == 'notes':
+                        self.modify_notes()
+                        break
+                    else:
+                        print('Please enter the features with correct format: item, remind_time, priority, notes')
+            else:
+                break 
 
