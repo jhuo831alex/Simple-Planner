@@ -30,12 +30,13 @@ class ReminderGUI:
 
     def __init__(self,master):
         self.event_list = list()
+        self.var_lst = list()
+        self.button_lst = list()
 
         master.title('Simple Reminder')
 
         self.frame = ttk.Frame(master)
         self.frame.pack()
-
 
         ttk.Label(self.frame,text='Task Name').grid(row = 0, column = 0, pady = 5,sticky=W)
         self.task_name = ttk.Entry(self.frame)
@@ -46,19 +47,39 @@ class ReminderGUI:
         #ttk.Button(self.frame, text = 'Add Task',command = self.add_task).grid(row = len(self.event_list)+1, column = 0, padx = 5, pady = 5)
 
 
+    def naccheck(self, check,var):
+        if var.get() == 0:
+            check.configure(state=DISABLED)
+        else:
+            check.configure(state=NORMAL)
 
-    # def add_task(self):
-    #     new_event = Event(task_name.get())
-    #     self.event_list.append(new_event)
+    def removeCheckButton(self,button_num):
+        self.button_lst[button_num].destroy()
 
         
     def update_reminder(self):
         new_event = Event(self.task_name.get())
         self.task_name.delete(0,END)
         self.event_list.append(new_event)
-        for i in range(len(self.event_list)):
-            var = IntVar()
-            Checkbutton(self.frame,text=str(self.event_list[i]),variable = var,).grid(row=i+2,column=0,sticky=W,columnspan=2)
+        n = len(self.event_list)
+        var = IntVar()
+        check = Checkbutton(self.frame,text=str(self.event_list[n-1]),variable=var).grid(row=n+2,column=0,sticky=W,columnspan=2)
+        self.var_lst.append(var)
+        self.button_lst.append(check)
+
+        for i in range(len(self.var_lst)):
+            print (self.var_lst[i].get())
+            if self.var_lst[i].get() == 1:
+                self.button_lst[i].destroy()
+                self.button_lst.pop(i)
+                self.var_lst.pop(i)
+
+            
+        
+
+        # for i in range(len(self.event_list)):
+        #     var = IntVar()
+        #     Checkbutton(self.frame,text=str(self.event_list[i]),variable=var).grid(row=i+2,column=0,sticky=W,columnspan=2)
  
 
         
