@@ -87,6 +87,27 @@ class Event:
                     modify_notes()
                     break
                 else:
-                    print('Please enter the features with correct format')
-                    
+                    print('Please enter the features with correct format: item, remind_time, priority, notes')
+
+        while True:
+        question2=input('Do you want to modify other features of your event?')
+        if question2 in ['y','yes','Y','Yes']:
+            while True:
+                change = input ('What feature would you like to change?')
+                if change == 'item':
+                    modify_item()
+                    break
+                elif change == 'remind_time':
+                    modify_remind_time()
+                    break
+                elif change == 'priority':
+                    modify_priority()
+                    break
+                elif change == 'notes':
+                    modify_notes()
+                    break
+                else:
+                    print('Please enter the features with correct format: item, remind_time, priority, notes')
+        else:
+            break 
 
