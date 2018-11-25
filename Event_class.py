@@ -37,41 +37,95 @@ class Event:
 
     def __str__(self):
         return self.__repr__()
+
+
+    def modify_item(self,new_item=None):
+        while True:
+            new_item = input('What is your new item?')
+            if new_item != '':
+                self.item = new_item
+                break
+            else:
+                print('You must enter your new_item')
+
+
+    def modify_remind_time(self,new_remind_time=None):
+        import datetime
+        while True:
+            new_remind_string = input('What is your new remind time?(ex: 05/01/2018 23:01)')
+            if new_remind_string == '':
+                self.remind_time = None
+                break
+            try:
+                new_remind_time = datetime.datetime.strptime(new_remind_string, "%m/%d/%Y %H:%M") 
+                self.remind_time = new_remind_time
+                break
+            except:
+                print('Invalid date format. Please refer to example.')
+                
         
 
-    # def modify_notes(self,new_item = None, new_remind_time = None, new_priority=None, new_notes=None):
-    #     question=input('Do you want to modify your event?')
-    #     if question in ['y','yes','Y','Yes']:
-    #         features = input('What features of this event do you want to change? (Please enter: item, remind_time, priority, or notes)').split()
-    #         for feature in features:
-    #             if feature == 'item':
-    #                 new_item = input('What is your new item?')
-    #                 self.item = new_item
-    #             else if feature == 'remind_time':
-    #                 new_remind_time = input('What is your new remind time?')
-    #                 self.remind_time = new_remind_time
-    #             else if feature == 'priority':
-    #                 new_priority = input('What is your new priority?')
-    #                 self.priority = new_priority
-    #             else if feature == 'notes':
-    #                 new_notes = input('What is your new notes?')
-    #                 self.notes = new_notes
+    def modify_priority(self,new_priority=None):
+        while True:
+            new_priority = input('What is your new priority?(ex:*/**/***)')
+            if new_priority == '':
+                self.priority = None
+                break
+            elif new_priority in ['*','**','***']:
+                self.priority = new_priority
+                break
+            else:
+                print('Invalid priority format. Please refer to example.')
 
-    # def modify_notes(self,new_item = None, new_remind_time = None, new_priority=None, new_notes=None):
-    #     question=input('Do you want to modify your event?')
-    #     if question in ['y','yes','Y','Yes']:
-    #         features = input('What features of this event do you want to change? (Please enter: item, remind_time, priority, or notes)').split()
-    #         for feature in features:
-    #             if feature == 'item':
-    #                 new_item = input('What is your new item?')
-    #                 self.item = new_item
-    #             else if feature == 'remind_time':
-    #                 new_remind_time = input('What is your new remind time?')
-    #                 self.remind_time = new_remind_time
-    #             else if feature == 'priority':
-    #                 new_priority = input('What is your new priority?')
-    #                 self.priority = new_priority
-    #             else if feature == 'notes':
-    #                 new_notes = input('What is your new notes?')
-    #                 self.notes = new_notes
+
+    def modify_notes(self,new_notes=None):
+        new_notes = input('What is your new notes?')
+        if new_notes == '':
+            self.notes = None
+        else:
+            self.notes = new_notes
+            
+            
+
+    def modify(self):
+        question=input('Do you want to modify your event?')
+        if question in ['y','yes','Y','Yes']:
+            while True:
+                change = input ('What feature would you like to change first?')
+                if change == 'item':
+                    self.modify_item()
+                    break
+                elif change == 'remind_time':
+                    self.modify_remind_time()
+                    break
+                elif change == 'priority':
+                    self.modify_priority()
+                    break
+                elif change == 'notes':
+                    self.modify_notes()
+                    break
+                else:
+                    print('Please enter the features with correct format: item, remind_time, priority, notes')
+
+        while True:
+            question2=input('Do you want to modify other features of your event?')
+            if question2 in ['y','yes','Y','Yes']:
+                while True:
+                    change = input ('What feature would you like to change?')
+                    if change == 'item':
+                        self.modify_item()
+                        break
+                    elif change == 'remind_time':
+                        self.modify_remind_time()
+                        break
+                    elif change == 'priority':
+                        self.modify_priority()
+                        break
+                    elif change == 'notes':
+                        self.modify_notes()
+                        break
+                    else:
+                        print('Please enter the features with correct format: item, remind_time, priority, notes')
+            else:
+                break 
 
