@@ -36,10 +36,11 @@ class ReminderGUI:
 
         self.frame = ttk.Frame(master)
         self.frame.pack()
+        self.bottom_frame = ttk.Frame(master)
+        self.bottom_frame.pack(side = BOTTOM)
 
         ttk.Label(self.frame,text='Task').grid(row = 0, column = 0, pady = 5,sticky=W)
         ttk.Label(self.frame,text='Time').grid(row = 1, column = 0, pady = 5,sticky=W)
-        
 
         self.task_name = ttk.Entry(self.frame)
         self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W)
@@ -53,6 +54,8 @@ class ReminderGUI:
         option.grid(row=3,column = 1,padx=5,pady = 5,sticky=W)
         ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
 
+        ttk.Label(self.bottom_frame,text='Edit').grid(row = 0, column = 0, pady = 5,side=LEFT)        
+        #ttk.Button(self.bottom_frame,text='Edit',command = self.update_reminder).grid(row = 0, column = 0,pady = 5)
 
     def removeCheckButton(self,button_num):
         self.button_lst[button_num].destroy()
