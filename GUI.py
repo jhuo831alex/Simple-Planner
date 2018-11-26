@@ -98,43 +98,44 @@ class ReminderGUI:
             self.button_lst.append(check)
     
     def modify_event(self):
-        self.task = self.task_name.get()
-        if self.task in self.event_list:
-            task = self.task_name.get()
-            # if self.time.get() != None:
-            #     time_value = self.time.get() 
-            # else:
-            time_value = self.time.get()
+        task = self.task_name.get()
+        if task in self.event_list:
+            for i in range(len(self.event_list)):
+                if self.event_list[i]== task:
+                    task = self.task_name.get()
+                    # if self.time.get() != None:
+                    #     time_value = self.time.get() 
+                    # else:
+                    time_value = self.time.get()
+                    priority = self.var.get()
 
-            priority = self.var.get()
+                    self.task_name.delete(0,END)
+                    self.time.delete(0,END)
+                    self.event_list[i]=task
+                    self.time_lst[i]=time_value
+                    self.priority_lst[i]=priority
+                    
+                    display_text = ''
+                    if priority != 'None':
+                        display_text += priority + ' '
+                    display_text  += task
+                    if time_value:
+                        display_text += '\n'+ time_value 
 
-            self.task_name.delete(0,END)
-            self.time.delete(0,END)
-            self.event_list.append(task)
-            self.time_lst.append(time_value)
-            self.priority_lst.append(priority)
-            
-            display_text = ''
-            if priority != 'None':
-                display_text += priority + ' '
-            display_text  += task
-            if time_value:
-                display_text += '\n'+ time_value 
+                    n = len(self.event_list)
+                    var = IntVar()
 
-            n = len(self.event_list)
-            var = IntVar()
+                    
 
-            
-
-            check = Checkbutton(self.frame,
-                        wraplength = 220,
-                        text=display_text,
-                        variable=task,
-                        fg = "#6897bb",
-                        command=lambda ni=n-1: self.removeCheckButton(ni))
-            
-            check.grid(row=n+3,column=0,sticky=W,columnspan=2)
-            self.button_lst.append(check)
+                    check = Checkbutton(self.frame,
+                                wraplength = 220,
+                                text=display_text,
+                                variable=task,
+                                fg = "#6897bb",
+                                command=lambda ni=n-1: self.removeCheckButton(ni))
+                    
+                    check.grid(row=n+3,column=0,sticky=W,columnspan=2)
+                    self.button_lst.append(check)
 
 
 root = Tk()
