@@ -44,15 +44,15 @@ class ReminderGUI:
         self.bottom_frame.pack(side = BOTTOM)
 
 
-        ttk.Label(self.frame,text='Task').grid(row = 0, column = 0, pady = 5,sticky=W)
-        ttk.Label(self.frame,text='Time').grid(row = 1, column = 0, pady = 5,sticky=W)
+        Label(self.frame,text='Task',bg = '#bed2e7').grid(row = 0, column = 0, pady = 5,sticky=W)
+        Label(self.frame,text='Time',bg = '#bed2e7').grid(row = 1, column = 0, pady = 5,sticky=W)
         
         self.task_name = Entry(self.frame)
         self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W)
         self.time = Entry(self.frame)
         self.time.grid(row=1,column = 1,padx=5,pady = 5,sticky=W)
 
-        ttk.Label(self.frame,text='Priority').grid(row = 3, column = 0, pady = 5,sticky=W)
+        Label(self.frame,text='Priority',bg = '#bed2e7').grid(row = 3, column = 0, pady = 5,sticky=W)
         self.var = StringVar(self.frame)
         self.var.set("None") 
         option = OptionMenu(self.frame, self.var, "None", "*", "**", "***")
@@ -91,7 +91,8 @@ class ReminderGUI:
                         wraplength = 220,
                         text=display_text,
                         variable=task,
-                        fg = "#6897bb",
+                        fg = '#3b5998',
+                        bg = '#bed2e7',
                         command=lambda ni=n-1: self.removeCheckButton(ni))
             
             check.grid(row=n+3,column=0,sticky=W,columnspan=2)
