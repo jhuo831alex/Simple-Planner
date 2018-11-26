@@ -55,6 +55,7 @@ class ReminderGUI:
         option = OptionMenu(self.frame, self.var, "None", "*", "**", "***")
         option.grid(row=3,column = 1,padx=5,pady = 5,sticky=W)
         ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
+        ttk.Button(self.frame,text='Edit',command = self.modify_event).grid(row = 1, column = 2,pady = 5)
 
     def removeCheckButton(self,button_num):
         self.button_lst[button_num].destroy()
@@ -94,8 +95,8 @@ class ReminderGUI:
             self.button_lst.append(check)
     
     def modify_event(self):
-        task = self.task_name.get()
-        if task in self.event_list:
+        self.task = self.task_name.get()
+        if self.task in self.event_list:
             time_value = self.time.get()
             priority = self.var.get()
             new_event = Event(self.task_name.get())
