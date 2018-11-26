@@ -37,9 +37,20 @@ class ReminderGUI:
         self.frame = ttk.Frame(master)
         self.frame.pack()
 
-        ttk.Label(self.frame,text='Task Name').grid(row = 0, column = 0, pady = 5,sticky=W)
+        ttk.Label(self.frame,text='Task').grid(row = 0, column = 0, pady = 5,sticky=W)
+        ttk.Label(self.frame,text='Time').grid(row = 1, column = 0, pady = 5,sticky=W)
+        
+
         self.task_name = ttk.Entry(self.frame)
         self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W)
+        self.time = ttk.Entry(self.frame)
+        self.time.grid(row=1,column = 1,padx=5,pady = 5,sticky=W)
+
+        ttk.Label(self.frame,text='Priority').grid(row = 3, column = 0, pady = 5,sticky=W)
+        self.var = StringVar(self.frame)
+        self.var.set("None") # initial value
+        option = OptionMenu(self.frame, self.var, "None", "*", "**", "***")
+        option.grid(row=3,column = 1,padx=5,pady = 5,sticky=W)
         ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
 
 
@@ -48,19 +59,23 @@ class ReminderGUI:
 
         
     def update_reminder(self):
-        new_event = Event(self.task_name.get())
-        self.task_name.delete(0,END)
-        self.event_list.append(new_event)
-        n = len(self.event_list)
-        var = IntVar()
+        task = self.task_name.get()
+        time_value = self.time.get()
+        priority = self.var.get()
+        if task: 
+            new_event = Event(self.task_name.get())
+            self.task_name.delete(0,END)
+            self.event_list.append(new_event)
+            n = len(self.event_list)
+            var = IntVar()
 
-        check = Checkbutton(self.frame,
-                    text=self.event_list[n-1],
-                    variable=self.event_list[n-1],
-                    command=lambda ni=n-1: self.removeCheckButton(ni))
-        
-        check.grid(row=n+2,column=0,sticky=W,columnspan=2)
-        self.button_lst.append(check)
+            check = Checkbutton(self.frame,
+                        text=self.event_list[n-1],
+                        variable=self.event_list[n-1],
+                        command=lambda ni=n-1: self.removeCheckButton(ni))
+            
+            check.grid(row=n+3,column=0,sticky=W,columnspan=2)
+            self.button_lst.append(check)
 
 root = Tk()
 reminder_gui = ReminderGUI(root)
