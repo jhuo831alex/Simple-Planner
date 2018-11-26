@@ -30,6 +30,8 @@ class ReminderGUI:
 
     def __init__(self,master):
         self.event_list = list()
+        self.time_lst = list()
+        self.priority_lst = list()
         self.button_lst = list()
 
         master.title('Simple Reminder')
@@ -49,13 +51,10 @@ class ReminderGUI:
 
         ttk.Label(self.frame,text='Priority').grid(row = 3, column = 0, pady = 5,sticky=W)
         self.var = StringVar(self.frame)
-        self.var.set("None") # initial value
+        self.var.set("None") 
         option = OptionMenu(self.frame, self.var, "None", "*", "**", "***")
         option.grid(row=3,column = 1,padx=5,pady = 5,sticky=W)
         ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
-
-        ttk.Label(self.bottom_frame,text='Edit').grid(row = 0, column = 0, pady = 5,side=LEFT)        
-        #ttk.Button(self.bottom_frame,text='Edit',command = self.update_reminder).grid(row = 0, column = 0,pady = 5)
 
     def removeCheckButton(self,button_num):
         self.button_lst[button_num].destroy()
@@ -65,7 +64,40 @@ class ReminderGUI:
         task = self.task_name.get()
         time_value = self.time.get()
         priority = self.var.get()
+
         if task: 
+            self.task_name.delete(0,END)
+            self.time.delete(0,END)
+
+            self.event_list.append(task)
+            self.time_lst.append(time_value)
+            self.priority_lst.append(priority)
+
+            display_text = ''
+            if priority != 'None':
+                display_text += priority + ' '
+            display_text  += task
+            if time_value:
+                display_text += '\n'+ time_value 
+
+            n = len(self.event_list)
+            var = IntVar()
+
+            check = Checkbutton(self.frame,
+                        wraplength = 220,
+                        text=display_text,
+                        variable=task,
+                        fg = "#6897bb",
+                        command=lambda ni=n-1: self.removeCheckButton(ni))
+            
+            check.grid(row=n+3,column=0,sticky=W,columnspan=2)
+            self.button_lst.append(check)
+    
+    def modify_event(self):
+        task = self.task_name.get()
+        if task in self.event_list:
+            time_value = self.time.get()
+            priority = self.var.get()
             new_event = Event(self.task_name.get())
             self.task_name.delete(0,END)
             self.event_list.append(new_event)
