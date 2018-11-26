@@ -1,9 +1,10 @@
 from Reminder_class import Reminder
 from Event_class import Event
+import sys
 
 new_reminder = Reminder()
 message = "Welcome to our awesome reminder!"
-While True:
+while True:
     ask_User = input("What would you like to do? (Add Event/Modify Event/Check Event/Quit)")
     if ask_User in ["Add Event", "add event","Add event", "Add","add"]:
         new_reminder.add_event()
@@ -12,12 +13,13 @@ While True:
         print(new_reminder)
         while True:
             question = input("Which event would you like to modify? (Event number)") 
-            if question in new_reminder.event_list:
-                question.modify()
+            try:
+                new_reminder.event_list[int(question)-1].modify()
                 print(new_reminder)
-            else:
-                print("No such event.")
                 break
+            except:
+                print("No such event.")
+                break            
     elif ask_User in ["Check Event", "check event", "Check event", "Check", "check"]:
         new_reminder.check_event()
         print(new_reminder)
@@ -26,4 +28,4 @@ While True:
         break
     else:
         print("Invalid input. Please refer to example.")
-exit()
+sys.exit()

@@ -29,7 +29,7 @@ class Reminder:
         from datetime import datetime
         from Event_class import Event
 
-        item_ = input('What task would you like to add?')
+        item_ = input('What task would you like to add? ')
 
         if_remind = self.prompt_user('Would you like to be reminded on a day? (y/n)')
         if if_remind:
