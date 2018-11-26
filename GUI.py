@@ -93,23 +93,44 @@ class ReminderGUI:
             self.button_lst.append(check)
     
     def modify_event(self):
-        task = self.task_name.get()
-        if task in self.event_list:
+        self.task = self.task_name.get()
+        if self.task in self.event_list:
+            task = self.task_name.get()
+            # if self.time.get() != None:
+            #     time_value = self.time.get() 
+            # else:
             time_value = self.time.get()
+
             priority = self.var.get()
-            new_event = Event(self.task_name.get())
+
             self.task_name.delete(0,END)
-            self.event_list.append(new_event)
+            self.time.delete(0,END)
+            self.event_list.append(task)
+            self.time_lst.append(time_value)
+            self.priority_lst.append(priority)
+            
+            display_text = ''
+            if priority != 'None':
+                display_text += priority + ' '
+            display_text  += task
+            if time_value:
+                display_text += '\n'+ time_value 
+
             n = len(self.event_list)
             var = IntVar()
 
+            
+
             check = Checkbutton(self.frame,
-                        text=self.event_list[n-1],
-                        variable=self.event_list[n-1],
+                        wraplength = 220,
+                        text=display_text,
+                        variable=task,
+                        fg = "#6897bb",
                         command=lambda ni=n-1: self.removeCheckButton(ni))
             
             check.grid(row=n+3,column=0,sticky=W,columnspan=2)
             self.button_lst.append(check)
+
 
 root = Tk()
 reminder_gui = ReminderGUI(root)
