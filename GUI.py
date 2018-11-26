@@ -1,6 +1,7 @@
 from tkinter import messagebox
-#from tkinter import ttk
 from tkinter import *
+from tkinter import ttk
+
 # from Event_class import Event
 # from Reminder_class import Reminder
 
@@ -37,23 +38,27 @@ class ReminderGUI:
         master.title('Simple Reminder')
 
         self.frame = Frame(master,bg = '#bed2e7')
-        self.frame.pack()
 
-        Label(self.frame,text='Task').grid(row = 0, column = 0, pady = 5,sticky=W)
-        Label(self.frame,text='Time').grid(row = 1, column = 0, pady = 5,sticky=W)
+        self.frame.pack()
+        self.bottom_frame = ttk.Frame(master)
+        self.bottom_frame.pack(side = BOTTOM)
+
+
+        ttk.Label(self.frame,text='Task').grid(row = 0, column = 0, pady = 5,sticky=W)
+        ttk.Label(self.frame,text='Time').grid(row = 1, column = 0, pady = 5,sticky=W)
         
         self.task_name = Entry(self.frame)
         self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W)
         self.time = Entry(self.frame)
         self.time.grid(row=1,column = 1,padx=5,pady = 5,sticky=W)
 
-        Label(self.frame,text='Priority').grid(row = 3, column = 0, pady = 5,sticky=W)
+        ttk.Label(self.frame,text='Priority').grid(row = 3, column = 0, pady = 5,sticky=W)
         self.var = StringVar(self.frame)
         self.var.set("None") 
         option = OptionMenu(self.frame, self.var, "None", "*", "**", "***")
         option.grid(row=3,column = 1,padx=5,pady = 5,sticky=W)
-        Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
-        Button(self.frame,text='Edit',command = self.modify_event).grid(row = 1, column = 2,pady = 5)
+        ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
+        ttk.Button(self.frame,text='Edit',command = self.modify_event).grid(row = 1, column = 2,pady = 5)
 
     def removeCheckButton(self,button_num):
         self.button_lst[button_num].destroy()
