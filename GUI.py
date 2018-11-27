@@ -36,6 +36,7 @@ class ReminderGUI:
         self.button_lst = list()
 
         master.title('Simple Reminder')
+        master.resizable(False, False)
 
         self.frame = Frame(master,bg = '#bed2e7')
 
@@ -43,22 +44,29 @@ class ReminderGUI:
         self.bottom_frame = ttk.Frame(master)
         self.bottom_frame.pack(side = BOTTOM)
 
-
-        Label(self.frame,text='Task',bg = '#bed2e7').grid(row = 0, column = 0, pady = 5,sticky=W)
-        Label(self.frame,text='Time',bg = '#bed2e7').grid(row = 1, column = 0, pady = 5,sticky=W)
+        Label(self.frame,text='Task',bg = '#bed2e7',fg = 'white',font = 'Helvetica 16 bold').grid(row = 0, column = 0, pady = 5,sticky=E)
+        Label(self.frame,text='Time',bg = '#bed2e7', fg= 'white',font = 'Helvetica 16 bold').grid(row = 1, column = 0, pady = 5,sticky=E)
         
         self.task_name = Entry(self.frame)
         self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W)
         self.time = Entry(self.frame)
         self.time.grid(row=1,column = 1,padx=5,pady = 5,sticky=W)
 
-        Label(self.frame,text='Priority',bg = '#bed2e7').grid(row = 3, column = 0, pady = 5,sticky=W)
+        Label(self.frame,text='Priority',bg = '#bed2e7',fg = 'white',font = 'Helvetica 16 bold').grid(row = 3, column = 0, pady = 5,sticky=E)
         self.var = StringVar(self.frame)
         self.var.set("None") 
         option = OptionMenu(self.frame, self.var, "None", "*", "**", "***")
         option.grid(row=3,column = 1,padx=5,pady = 5,sticky=W)
+
+        self.style = ttk.Style()
+        # self.style.configure('TButton', background='black')
+        self.style.configure('TButton', foreground='#b8bfd8')
         ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
         ttk.Button(self.frame,text='Edit',command = self.modify_event).grid(row = 1, column = 2,pady = 5)
+
+        status = Label(master,text = "Proudly Presented by Jiahao, Jiakai, Xinxin and Yingyan",
+                        bd=1,relief = SUNKEN, anchor = W, font = "Helvetica 10 italic",bg='#b8bfd8',fg='white')
+        status.pack(side=BOTTOM,fill=X)
 
     def removeCheckButton(self,button_num):
         self.button_lst[button_num].destroy()
@@ -91,7 +99,8 @@ class ReminderGUI:
                         wraplength = 220,
                         text=display_text,
                         variable=task,
-                        fg = '#3b5998',
+                        #fg = '#3b5998',
+                        fg = 'white',
                         bg = '#bed2e7',
                         command=lambda ni=n-1: self.removeCheckButton(ni))
             
