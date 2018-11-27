@@ -34,14 +34,19 @@ class ReminderGUI:
         self.time_lst = list()
         self.priority_lst = list()
         self.button_lst = list()
+        self.var_lst = list()
+
+        status = Label(master,text = "Proudly Presented by Jiahao, Jiakai, Xinxin and Yingyan",
+                        bd=1,relief = SUNKEN, anchor = W, font = "Helvetica 10 italic" ,bg='#b8bfd8',fg='white',height =0)
+        status.pack(side=BOTTOM,fill=X)
 
         master.title('Simple Reminder')
         master.resizable(False, False)
 
         self.frame = Frame(master,bg = '#bed2e7')
-
         self.frame.pack()
-        self.bottom_frame = ttk.Frame(master)
+
+        self.bottom_frame = Frame(master,bg = '#bed2e7')
         self.bottom_frame.pack(side = BOTTOM)
 
         Label(self.frame,text='Task',bg = '#bed2e7',fg = 'white',font = 'Helvetica 16 bold').grid(row = 0, column = 0, pady = 5,sticky=E)
@@ -58,19 +63,16 @@ class ReminderGUI:
         option = OptionMenu(self.frame, self.var, "None", "*", "**", "***")
         option.grid(row=3,column = 1,padx=5,pady = 5,sticky=W)
 
+
         self.style = ttk.Style()
         # self.style.configure('TButton', background='black')
         self.style.configure('TButton', foreground='#b8bfd8')
         ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 2,pady = 5)
         ttk.Button(self.frame,text='Edit',command = self.modify_event).grid(row = 1, column = 2,pady = 5)
 
-        status = Label(master,text = "Proudly Presented by Jiahao, Jiakai, Xinxin and Yingyan",
-                        bd=1,relief = SUNKEN, anchor = W, font = "Helvetica 10 italic",bg='#b8bfd8',fg='white')
-        status.pack(side=BOTTOM,fill=X)
 
     def removeCheckButton(self,button_num):
         self.button_lst[button_num].destroy()
-
         
     def update_reminder(self):
         task = self.task_name.get()
@@ -98,7 +100,7 @@ class ReminderGUI:
             check = Checkbutton(self.frame,
                         wraplength = 220,
                         text=display_text,
-                        variable=task,
+                        variable=var,
                         #fg = '#3b5998',
                         fg = 'white',
                         bg = '#bed2e7',
@@ -106,6 +108,7 @@ class ReminderGUI:
             
             check.grid(row=n+3,column=0,sticky=W,columnspan=2)
             self.button_lst.append(check)
+            self.var_lst.append(var)
     
     def modify_event(self):
         task = self.task_name.get()
