@@ -36,18 +36,15 @@ class ReminderGUI:
         self.button_lst = list()
         self.var_lst = list()
 
-        status = Label(master,text = "Proudly Presented by Jiahao, Jiakai, Xinxin and Yingyan",
-                        bd=1,relief = SUNKEN, anchor = W, font = "Helvetica 10 italic" ,bg='#b8bfd8',fg='white',height =0)
-        status.pack(side=BOTTOM,fill=X)
-
         master.title('Simple Reminder')
         master.resizable(False, False)
 
         self.frame = Frame(master,bg = '#bed2e7')
         self.frame.pack()
 
-        self.bottom_frame = Frame(master,bg = '#bed2e7')
-        self.bottom_frame.pack(side = BOTTOM)
+        status = Label(master,text = "Proudly Presented by Jiahao, Jiakai, Xinxin and Yingyan",
+                        bd=1,relief = SUNKEN, anchor = W, font = "Helvetica 10 italic" ,bg='#b8bfd8',fg='white',height =0)
+        status.pack(side=BOTTOM,fill=X)
 
         Label(self.frame,text='Task',bg = '#bed2e7',fg = 'white',font = 'Helvetica 16 bold').grid(row = 0, column = 0, pady = 5,sticky=E)
         Label(self.frame,text='Time',bg = '#bed2e7', fg= 'white',font = 'Helvetica 16 bold').grid(row = 1, column = 0, pady = 5,sticky=E)
@@ -87,6 +84,10 @@ class ReminderGUI:
             self.time_lst.append(time_value)
             self.priority_lst.append(priority)
 
+            if len(self.event_list)==1:
+                Label(self.frame,text='Reminder List',
+                    bg = '#bed2e7',fg = 'white',font = 'Helvetica 20 bold underline').grid(row = 4,column = 0,pady = 5,columnspan = 3)
+
             display_text = ''
             if priority != 'None':
                 display_text += priority + ' '
@@ -104,9 +105,10 @@ class ReminderGUI:
                         #fg = '#3b5998',
                         fg = 'white',
                         bg = '#bed2e7',
+                        font = 'Helvetica 16',
                         command=lambda ni=n-1: self.removeCheckButton(ni))
             
-            check.grid(row=n+3,column=0,sticky=W,columnspan=2)
+            check.grid(row=n+4,column=0,sticky=W,columnspan=2)
             self.button_lst.append(check)
             self.var_lst.append(var)
     
