@@ -41,18 +41,18 @@ class Event:
 
     def modify_item(self,new_item=None):
         while True:
-            new_item = input('What is your new item?')
+            new_item = input('What is your new task? ')
             if new_item != '':
                 self.item = new_item
                 break
             else:
-                print('You must enter your new_item')
+                print('You must enter your task.')
 
 
     def modify_remind_time(self,new_remind_time=None):
         import datetime
         while True:
-            new_remind_string = input('What is your new remind time?(ex: 05/01/2018 23:01)')
+            new_remind_string = input('What is your new remind time? (ex: 05/01/2018 23:01)')
             if new_remind_string == '':
                 self.remind_time = None
                 break
@@ -67,7 +67,7 @@ class Event:
 
     def modify_priority(self,new_priority=None):
         while True:
-            new_priority = input('What is your new priority?(ex:*/**/***)')
+            new_priority = input('What is your new priority?(ex:*/**/***) ')
             if new_priority == '':
                 self.priority = None
                 break
@@ -79,7 +79,7 @@ class Event:
 
 
     def modify_notes(self,new_notes=None):
-        new_notes = input('What is your new notes?')
+        new_notes = input('What is your new notes? ')
         if new_notes == '':
             self.notes = None
         else:
@@ -88,44 +88,44 @@ class Event:
             
 
     def modify(self):
-        question=input('Do you want to modify your event?')
+        question=input('Would you like to modify your event? ')
         if question in ['y','yes','Y','Yes']:
             while True:
-                change = input ('What feature would you like to change first?')
-                if change == 'item':
+                change = input ('What feature would you like to change first? (Task/Time/Priority/Notes)')
+                if change in ['task','Task']:
                     self.modify_item()
                     break
-                elif change == 'remind_time':
+                elif change in ['Time','time']:
                     self.modify_remind_time()
                     break
-                elif change == 'priority':
+                elif change in ['priority','Priority']:
                     self.modify_priority()
                     break
-                elif change == 'notes':
+                elif change in ['Notes','notes']:
                     self.modify_notes()
                     break
                 else:
-                    print('Please enter the features with correct format: item, remind_time, priority, notes')
+                    print('Please enter the features with correct format: (Task/Time/Priority/Notes)')
 
         while True:
-            question2=input('Do you want to modify other features of your event?')
+            question2=input('Would you like to modify other features of your event? ')
             if question2 in ['y','yes','Y','Yes']:
                 while True:
-                    change = input ('What feature would you like to change?')
-                    if change == 'item':
+                    change = input ('What feature would you like to change? (Task/Time/Priority/Notes)')
+                    if change in ['task','Task']:
                         self.modify_item()
                         break
-                    elif change == 'remind_time':
+                    elif change in ['Time','time']:
                         self.modify_remind_time()
                         break
-                    elif change == 'priority':
+                    elif change in ['priority','Priority']:
                         self.modify_priority()
                         break
-                    elif change == 'notes':
+                    elif change in ['Notes','notes']:
                         self.modify_notes()
                         break
                     else:
-                        print('Please enter the features with correct format: item, remind_time, priority, notes')
+                        print('Please enter the features with correct format: (Task/Time/Priority/Notes)')
             else:
                 break 
 
