@@ -117,42 +117,47 @@ class ReminderGUI:
         if task in self.event_list:
             for i in range(len(self.event_list)):
                 if self.event_list[i]== task:
+                    self.removeCheckButton(i)
+                    self.event_list.pop(i)
+                    self.time_lst.pop(i)
+                    self.priority_lst.pop(i)
                     #task = self.task_name.get()
                     # if self.time.get() != None:
                     #     time_value = self.time.get() 
                     # else:
-                    time_value = self.time.get()
-                    priority = self.var.get()
+                    # time_value = self.time.get()
+                    # priority = self.var.get()
 
-                    self.task_name.delete(0,END)
-                    self.time.delete(0,END)
-                    self.event_list[i]=task
-                    self.time_lst[i]=time_value
-                    self.priority_lst[i]=priority
+                    # self.task_name.delete(0,END)
+                    # self.time.delete(0,END)
+                    # self.event_list[i]=task
+                    # self.time_lst[i]=time_value
+                    # self.priority_lst[i]=priority
                     
-                    display_text = ''
-                    if priority != 'None':
-                        display_text += priority + ' '
-                    display_text  += task
-                    if time_value:
-                        display_text += '\n'+ time_value 
+                    # display_text = ''
+                    # if priority != 'None':
+                    #     display_text += priority 
+                    # display_text  += task
+                    # if time_value:
+                    #     display_text += '\n'+ time_value 
 
                     n = len(self.event_list)
                     var = IntVar()
 
                     
 
-                    check = Checkbutton(self.frame,
-                                wraplength = 220,
-                                text=display_text,
-                                variable=task,
-                                fg = 'white',
-                                bg = '#bed2e7',
-                                font = 'Helvetica 16',
-                                command=lambda ni=n-1: self.removeCheckButton(ni))
+                    # check = Checkbutton(self.frame,
+                    #             wraplength = 220,
+                    #             text=display_text,
+                    #             variable=task,
+                    #             fg = 'white',
+                    #             bg = '#bed2e7',
+                    #             font = 'Helvetica 16',
+                    #             command=lambda ni=n: self.removeCheckButton(i))
                     
                     check.grid(row=n+4,column=0,sticky=W,columnspan=2)
                     #self.button_lst.append(check)
+                    self.update_reminder()
 
 
 root = Tk()
