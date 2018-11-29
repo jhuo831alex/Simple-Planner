@@ -141,7 +141,7 @@ class ReminderGUI:
         if task in self.event_list:
             for i in range(len(self.event_list)):
                 if self.event_list[i]== task:
-                    task = self.task_name.get()
+                    #task = self.task_name.get()
                     # if self.time.get() != None:
                     #     time_value = self.time.get() 
                     # else:
@@ -170,11 +170,13 @@ class ReminderGUI:
                                 wraplength = 220,
                                 text=display_text,
                                 variable=task,
-                                fg = "#6897bb",
+                                fg = 'white',
+                                bg = '#bed2e7',
+                                font = 'Helvetica 16',
                                 command=lambda ni=n-1: self.removeCheckButton(ni))
                     
-                    check.grid(row=n+3,column=0,sticky=W,columnspan=2)
-                    self.button_lst.append(check)
+                    check.grid(row=n+4,column=0,sticky=W,columnspan=2)
+                    #self.button_lst.append(check)
 
 
 root = Tk()
