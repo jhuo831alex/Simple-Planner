@@ -50,7 +50,7 @@ class Event:
 
 
     def modify_item(self,new_item=None):
-        #ask users to enter a new name for the modified event
+        #ask users to enter the name of the event she/he wants to modify
         while True:
             new_item = input('What is your new task? ')
             if new_item != '':
