@@ -92,6 +92,8 @@ class ReminderGUI:
 
     def removeCheckButton(self,button_num):
         self.button_lst[button_num].destroy()
+        self.event_list.pop(button_num+1)
+
         
     def update_reminder(self):
         task = self.task_name.get()
@@ -102,7 +104,7 @@ class ReminderGUI:
         min_value = self.minvar.get()
         priority = self.var.get()
 
-        if task: 
+        if task and task not in self.event_list: 
             self.task_name.delete(0,END)
 
             self.event_list.append(task)
@@ -124,16 +126,17 @@ class ReminderGUI:
             var = IntVar()
 
             check = Checkbutton(self.frame,
-                        wraplength = 220,
+                        wraplength = 300,
                         text=display_text,
                         variable=var,
+                        anchor = W,
                         #fg = '#3b5998',
                         fg = 'white',
                         bg = '#bed2e7',
                         font = 'Helvetica 16',
                         command=lambda ni=n-1: self.removeCheckButton(ni))
             
-            check.grid(row=n+4,column=0,columnspan=3)
+            check.grid(row=n+4,column=0,columnspan=7,sticky=W,padx=20)
             self.button_lst.append(check)
             self.var_lst.append(var)
     
@@ -144,11 +147,12 @@ class ReminderGUI:
             for i in range(len(self.event_list)):
                 if self.event_list[i]== task:
 
-                    self.removeCheckButton(i)
+                    self.removeCheckButton(i)   
                     self.button_lst.pop(i)
+                    self.var_lst.pop(i)
                     self.event_list.pop(i)
                     self.time_lst.pop(i) 
-                    self.priority_lst.pop(i)                   
+                    self.priority_lst.pop(i)             
 
         self.update_reminder()
 
