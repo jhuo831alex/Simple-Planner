@@ -80,27 +80,12 @@ class ReminderGUI:
         min_value = self.minvar.get()
         priority = self.var.get()
 
-        if month_value != 'mm' and day_value != 'dd' and year_value != 'yyyy':
-            self.monthvar.trace('w',month_value)
-            self.monthvar = StringVar()
-            self.monthvar.set('mm')
-            self.dayvar.trace('w',day_value)
-            self.dayvar = StringVar()
-            self.dayvar.set('dd')
-            self.yearvar.trace('w',year_value)
-            self.yearvar = StringVar()
-            self.yearvar.set('yyyy')
-            if hour_value != 'hr' and min_value != 'min':
-                self.hourvar.trace('w',hour_value)
-                self.hourvar = StringVar()
-                self.hourvar.set('hr')
-                self.minvar.trace('w',min_value)
-                self.minvar = StringVar()
-                self.minvar.set('min')
-        if priority != 'None':
-            self.var.trace('w',priority)
-            self.var = StringVar()
-            self.var.set('None')
+        self.monthvar.set('mm')
+        self.dayvar.set('dd')
+        self.yearvar.set('yyyy')
+        self.hourvar.set('hr')
+        self.minvar.set('min')
+        self.var.set('None')
 
         if task: 
             self.task_name.delete(0,END)
@@ -108,19 +93,6 @@ class ReminderGUI:
             self.event_list.append(task)
             self.time_lst.append([month_value,day_value,year_value,hour_value,min_value])
             self.priority_lst.append(priority)
-
-            # self.monthvar.trace('w',month_value)
-            # self.monthvar.set('mm')
-            # self.dayvar.trace('w',day_value)
-            # self.dayvar.set('dd')
-            # self.yearvar.trace('w',year_value)
-            # self.yearvar.set('yyyy')
-            # self.hourvar.trace('w',hour_value)
-            # self.hourvar.set('hr')
-            # self.minvar.trace('w',min_value)
-            # self.minvar.set('min')
-            # self.var.trace('w',priority)
-            # self.var.set('None')
 
             if len(self.event_list)==1:
                 Label(self.frame,text='Reminder List',
@@ -157,14 +129,12 @@ class ReminderGUI:
         if task in self.event_list:
             for i in range(len(self.event_list)):
                 if self.event_list[i]== task:
-
                     self.removeCheckButton(i)   
                     self.button_lst.pop(i)
                     self.var_lst.pop(i)
                     self.event_list.pop(i)
                     self.time_lst.pop(i) 
                     self.priority_lst.pop(i)             
-
         self.update_reminder()
 
 root = Tk()
