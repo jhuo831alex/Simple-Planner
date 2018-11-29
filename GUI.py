@@ -52,12 +52,10 @@ class ReminderGUI:
         
         self.task_name = Entry(self.frame)
         self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W,columnspan = 3)
-        #self.time = Entry(self.frame)
         self.monthvar = StringVar(self.frame)
         self.monthvar.set("mm")
         month_option = OptionMenu(self.frame, self.monthvar,"01","02","03","04","05","06","07","08","09","10","11","12")
         month_option.grid(row=1,column=1,padx=5,pady = 5,sticky=W) 
-        #self.time.grid(row=1,column = 1,padx=5,pady = 5,sticky=W)
         self.dayvar = StringVar(self.frame)
         self.dayvar.set("dd")
         day_list = [str(i).zfill(2) for i in range(1,32)] 
@@ -97,27 +95,30 @@ class ReminderGUI:
         
     def update_reminder(self):
         task = self.task_name.get()
-        time_value = self.time.get()
+        month_value = self.monthvar.get()
+        day_value = self.dayvar.get()
+        year_value = self.yearvar.get()
+        hour_value = self.hourvar.get()
+        min_value = self.minvar.get()
         priority = self.var.get()
 
         if task: 
             self.task_name.delete(0,END)
-            self.time.delete(0,END)
 
             self.event_list.append(task)
-            self.time_lst.append(time_value)
+            self.time_lst.append([month_value,day_value,year_value,hour_value,min_value])
             self.priority_lst.append(priority)
 
             if len(self.event_list)==1:
                 Label(self.frame,text='Reminder List',
-                    bg = '#bed2e7',fg = 'white',font = 'Helvetica 20 bold underline').grid(row = 4,column = 0,pady = 5,columnspan = 3)
+                    bg = '#bed2e7',fg = 'white',font = 'Helvetica 20 bold underline').grid(row = 4,column = 1,pady = 5,columnspan = 3)
 
             display_text = ''
             if priority != 'None':
                 display_text += priority + ' '
             display_text  += task
-            if time_value:
-                display_text += '\n'+ time_value 
+            if month_value != 'mm' and day_value != 'dd' and year_value != 'yyyy' and hour_value != 'hr' and min_value != 'min':
+                display_text += '\n'+ month_value + '-' + day_value + '-' + year_value + ' ' + hour_value + ':' + min_value
 
             n = len(self.event_list)
             var = IntVar()
@@ -132,7 +133,7 @@ class ReminderGUI:
                         font = 'Helvetica 16',
                         command=lambda ni=n-1: self.removeCheckButton(ni))
             
-            check.grid(row=n+4,column=0,sticky=W,columnspan=2)
+            check.grid(row=n+4,column=0,columnspan=3)
             self.button_lst.append(check)
             self.var_lst.append(var)
     
