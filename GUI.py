@@ -70,7 +70,6 @@ class ReminderGUI:
 
     def removeCheckButton(self,button_num):
         self.button_lst[button_num].destroy()
-    
         
     def update_reminder(self):
         task = self.task_name.get()
@@ -81,17 +80,11 @@ class ReminderGUI:
         min_value = self.minvar.get()
         priority = self.var.get()
 
-        self.monthvar.trace('w',month_value)
         self.monthvar.set('mm')
-        self.dayvar.trace('w',day_value)
         self.dayvar.set('dd')
-        self.yearvar.trace('w',year_value)
         self.yearvar.set('yyyy')
-        self.hourvar.trace('w',hour_value)
         self.hourvar.set('hr')
-        self.minvar.trace('w',min_value)
         self.minvar.set('min')
-        self.var.trace('w',priority)
         self.var.set('None')
 
         if task: 
@@ -114,12 +107,11 @@ class ReminderGUI:
                 if hour_value != 'hr' and min_value != 'min':
                     display_text += hour_value + ':' + min_value
             
-
             n = len(self.event_list)
             var = IntVar()
 
             check = Checkbutton(self.frame,
-                        wraplength = 220,
+                        wraplength = 300,
                         text=display_text,
                         variable=var,
                         fg = 'white',
@@ -127,7 +119,7 @@ class ReminderGUI:
                         font = 'Helvetica 16',
                         command=lambda ni=n-1: self.removeCheckButton(ni))
             
-            check.grid(row=n+4,column=0,columnspan=3)
+            check.grid(row=n+4,column=0,columnspan=7,sticky=W,padx=20)
             self.button_lst.append(check)
             self.var_lst.append(var)
     
@@ -136,13 +128,14 @@ class ReminderGUI:
         if task in self.event_list:
             for i in range(len(self.event_list)):
                 if self.event_list[i]== task:
-
-                    self.removeCheckButton(i)
+                    self.removeCheckButton(i)   
                     self.button_lst.pop(i)
+                    self.var_lst.pop(i)
                     self.event_list.pop(i)
                     self.time_lst.pop(i) 
+
                     self.priority_lst.pop(i)
-                              
+            
 
         self.update_reminder()
 
