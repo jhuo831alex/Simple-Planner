@@ -1,6 +1,7 @@
+# A script that integrates all the functions in Reminder and Event classes 
+# in order to execute in command line. 
 from Reminder_class import Reminder
 from Event_class import Event
-import sys
 
 new_reminder = Reminder()
 message = "Welcome to our awesome reminder!"
@@ -28,4 +29,4 @@ while True:
         break
     else:
         print("Invalid input. Please refer to example.")
-sys.exit()
+

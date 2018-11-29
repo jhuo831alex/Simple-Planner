@@ -2,32 +2,7 @@ from tkinter import messagebox
 from tkinter import *
 from tkinter import ttk
 
-# from Event_class import Event
-# from Reminder_class import Reminder
-
-class Event:
-
-    def __init__(self,task):
-        self.task = task
-
-    def __repr__(self):
-        return self.task 
-
-    def __str__(self):
-        return self.__repr__()
-
-class Reminder:
-    
-    def __init__(self,event_list = list()):
-        self.event_list = event_list
-    
-    def add_event(self,task_title):
-        new_event = Event(task_title)
-        self.event_list.append(new_event)
-
 class ReminderGUI:
-
-    #reminder = Reminder()
 
     def __init__(self,master):
         self.event_list = list()
@@ -52,24 +27,29 @@ class ReminderGUI:
         
         self.task_name = Entry(self.frame)
         self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W,columnspan = 3)
+
         self.monthvar = StringVar(self.frame)
         self.monthvar.set("mm")
         month_option = OptionMenu(self.frame, self.monthvar,"01","02","03","04","05","06","07","08","09","10","11","12")
         month_option.grid(row=1,column=1,padx=5,pady = 5,sticky=W) 
+
         self.dayvar = StringVar(self.frame)
         self.dayvar.set("dd")
         day_list = [str(i).zfill(2) for i in range(1,32)] 
         day_option = OptionMenu(self.frame, self.dayvar,*day_list)
         day_option.grid(row=1,column=2,padx=5,pady = 5,sticky=W) 
+
         self.yearvar = StringVar(self.frame)
         self.yearvar.set("yyyy")
         year_option = OptionMenu(self.frame, self.yearvar,"2018","2019","2020","2021","2022")
         year_option.grid(row=1,column=3,padx=5,pady = 5,sticky=W)
+
         self.hourvar = StringVar(self.frame)
         self.hourvar.set("hr")
         hour_list = [str(i).zfill(2) for i in range(24)] 
         hour_option = OptionMenu(self.frame, self.hourvar,*hour_list)
         hour_option.grid(row=2,column=1,padx=5,pady = 5,sticky=W)
+
         self.minvar = StringVar(self.frame)
         self.minvar.set("min")
         min_list = [str(i).zfill(2) for i in range(60)] 
@@ -82,9 +62,7 @@ class ReminderGUI:
         option = OptionMenu(self.frame, self.var, "None", "*", "**", "***")
         option.grid(row=3,column = 1,padx=5,pady = 5,sticky=W,columnspan=2)
 
-
         self.style = ttk.Style()
-        # self.style.configure('TButton', background='black')
         self.style.configure('TButton', foreground='#b8bfd8')
         ttk.Button(self.frame,text='Add',command = self.update_reminder).grid(row = 0, column = 6,pady = 5)
         ttk.Button(self.frame,text='Edit',command = self.modify_event).grid(row = 1, column = 6,pady = 5)
@@ -92,8 +70,6 @@ class ReminderGUI:
 
     def removeCheckButton(self,button_num):
         self.button_lst[button_num].destroy()
-        self.event_list.pop(button_num+1)
-
         
     def update_reminder(self):
         task = self.task_name.get()
@@ -104,7 +80,20 @@ class ReminderGUI:
         min_value = self.minvar.get()
         priority = self.var.get()
 
-        if task and task not in self.event_list: 
+        self.monthvar.trace('w',month_value)
+        self.monthvar.set('mm')
+        self.dayvar.trace('w',day_value)
+        self.dayvar.set('dd')
+        self.yearvar.trace('w',year_value)
+        self.yearvar.set('yyyy')
+        self.hourvar.trace('w',hour_value)
+        self.hourvar.set('hr')
+        self.minvar.trace('w',min_value)
+        self.minvar.set('min')
+        self.var.trace('w',priority)
+        self.var.set('None')
+
+        if task: 
             self.task_name.delete(0,END)
 
             self.event_list.append(task)
@@ -119,8 +108,11 @@ class ReminderGUI:
             if priority != 'None':
                 display_text += priority + ' '
             display_text  += task
-            if month_value != 'mm' and day_value != 'dd' and year_value != 'yyyy' and hour_value != 'hr' and min_value != 'min':
-                display_text += '\n'+ month_value + '-' + day_value + '-' + year_value + ' ' + hour_value + ':' + min_value
+            if month_value != 'mm' and day_value != 'dd' and year_value != 'yyyy':
+                display_text += '\n'+ month_value + '-' + day_value + '-' + year_value + ' ' 
+                if hour_value != 'hr' and min_value != 'min':
+                    display_text += hour_value + ':' + min_value
+            
 
             n = len(self.event_list)
             var = IntVar()
@@ -129,8 +121,6 @@ class ReminderGUI:
                         wraplength = 300,
                         text=display_text,
                         variable=var,
-                        anchor = W,
-                        #fg = '#3b5998',
                         fg = 'white',
                         bg = '#bed2e7',
                         font = 'Helvetica 16',
