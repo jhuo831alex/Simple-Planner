@@ -1,10 +1,19 @@
 class Reminder:
+    """
+    This class allows the user to add task, check task, and print tasks
+    in the reminder list.
     
+    Attributes:
+        category: A string that is default to be "Reminder"
+        event_list: A list that contains all the task events
+    """
     def __init__(self,category = "Reminder", event_list = list()):
+        #Initialize instance attributes
         self.category = category
         self.event_list = event_list
 
     def __repr__(self):
+        #Print out reminder list 
         print_str = ''
         print_str += '\033[1m' + self.category + '\033[0m' + '\n\n'
         count = 1
@@ -17,6 +26,7 @@ class Reminder:
 
     #methods
     def prompt_user(self,prompt_msg):
+        #Prompts the user to answer yes/no questions
         input_ = input(prompt_msg)
         if input_ in ['y','yes','Y','Yes']:
             result = True
@@ -25,12 +35,13 @@ class Reminder:
         return result
 
     def add_event(self):
-
+        # Allows the user to add task item, remind time, priority level, and notes 
+        # according to preset format.
         from datetime import datetime
         from Event_class import Event
 
         item_ = input('What task would you like to add? ')
-
+        
         if_remind = self.prompt_user('Would you like to be reminded on a day? (y/n)')
         if if_remind:
             while True:
@@ -64,6 +75,8 @@ class Reminder:
         self.event_list.append(new_event)
 
     def check_event(self):
+        # Prints out the reminder list and allows user to check off any tasks
+        # that are completed. 
         print(self.__repr__())
         while True:
             item_to_delete = input("Which task did you complete? (Input task number)")
