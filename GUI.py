@@ -132,47 +132,19 @@ class ReminderGUI:
             self.var_lst.append(var)
     
     def modify_event(self):
+
         task = self.task_name.get()
         if task in self.event_list:
             for i in range(len(self.event_list)):
                 if self.event_list[i]== task:
-                    #task = self.task_name.get()
-                    # if self.time.get() != None:
-                    #     time_value = self.time.get() 
-                    # else:
-                    time_value = self.time.get()
-                    priority = self.var.get()
 
-                    self.task_name.delete(0,END)
-                    self.time.delete(0,END)
-                    self.event_list[i]=task
-                    self.time_lst[i]=time_value
-                    self.priority_lst[i]=priority
-                    
-                    display_text = ''
-                    if priority != 'None':
-                        display_text += priority + ' '
-                    display_text  += task
-                    if time_value:
-                        display_text += '\n'+ time_value 
+                    self.removeCheckButton(i)
+                    self.button_lst.pop(i)
+                    self.event_list.pop(i)
+                    self.time_lst.pop(i) 
+                    self.priority_lst.pop(i)                   
 
-                    n = len(self.event_list)
-                    var = IntVar()
-
-                    
-
-                    check = Checkbutton(self.frame,
-                                wraplength = 220,
-                                text=display_text,
-                                variable=task,
-                                fg = 'white',
-                                bg = '#bed2e7',
-                                font = 'Helvetica 16',
-                                command=lambda ni=n-1: self.removeCheckButton(ni))
-                    
-                    check.grid(row=n+4,column=0,sticky=W,columnspan=2)
-                    #self.button_lst.append(check)
-
+        self.update_reminder()
 
 root = Tk()
 reminder_gui = ReminderGUI(root)
