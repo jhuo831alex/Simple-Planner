@@ -103,25 +103,23 @@ class Event:
 
     def modify(self):
         # ask the user if he/she wants to modify the selected event
-        question=input('Would you like to modify your event? ')
-        if question in ['y','yes','Y','Yes']:
-            while True:
-                change = input ('What feature would you like to change first? (Task/Time/Priority/Notes)')
-                #ask user the feature that they want to modify
-                if change in ['task','Task']:
-                    self.modify_item()
-                    break
-                elif change in ['Time','time']:
-                    self.modify_remind_time()
-                    break
-                elif change in ['priority','Priority']:
-                    self.modify_priority()
-                    break
-                elif change in ['Notes','notes']:
-                    self.modify_notes()
-                    break
-                else:
-                    print('Please enter the features with correct format: (Task/Time/Priority/Notes)')
+        while True:
+            change = input ('What feature would you like to change first? (Task/Time/Priority/Notes)')
+            #ask user the feature that they want to modify
+            if change in ['task','Task']:
+                self.modify_item()
+                break
+            elif change in ['Time','time']:
+                self.modify_remind_time()
+                break
+            elif change in ['priority','Priority']:
+                self.modify_priority()
+                break
+            elif change in ['Notes','notes']:
+                self.modify_notes()
+                break
+            else:
+                print('Please enter the features with correct format: (Task/Time/Priority/Notes)')
 
         while True:
             # ask again if user wants to modify another feature 
