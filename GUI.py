@@ -53,7 +53,7 @@ class ReminderGUI:
         self.task_name.grid(row=0,column = 1,padx=5,pady = 5,sticky=W)
         self.time = Entry(self.frame)
         self.time.grid(row=1,column = 1,padx=5,pady = 5,sticky=W)
-
+        
         Label(self.frame,text='Priority',bg = '#bed2e7',fg = 'white',font = 'Helvetica 16 bold').grid(row = 3, column = 0, pady = 5,sticky=E)
         self.var = StringVar(self.frame)
         self.var.set("None") 
