@@ -162,8 +162,7 @@ class ReminderGUI:
 
                     self.priority_lst.pop(i)
             
-
-        self.update_reminder()
+            self.update_reminder()
 
 root = Tk()
 reminder_gui = ReminderGUI(root)
