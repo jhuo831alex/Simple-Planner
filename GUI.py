@@ -129,7 +129,7 @@ class ReminderGUI:
                 if hour_value != 'hr' and min_value != 'min':
                     display_text += hour_value + ':' + min_value
             
-            n = len(self.event_list)
+            n = len(self.button_lst)+1
             var = IntVar()
 
             #set the style of the event information displayed 
@@ -159,8 +159,8 @@ class ReminderGUI:
                     self.var_lst.pop(i)
                     self.event_list.pop(i)
                     self.time_lst.pop(i) 
-
                     self.priority_lst.pop(i)
+                    #self.removeCheckButton(i-1)
             
             self.update_reminder()
 
