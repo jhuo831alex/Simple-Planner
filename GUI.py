@@ -157,8 +157,19 @@ class ReminderGUI:
             for i in range(len(self.event_list)):
                 if self.event_list[i]== task:
                     self.removeCheckButton(i)   
+<<<<<<< HEAD
 
         self.update_reminder()
+=======
+                    self.button_lst.pop(i)
+                    self.var_lst.pop(i)
+                    self.event_list.pop(i)
+                    self.time_lst.pop(i) 
+
+                    self.priority_lst.pop(i)
+            
+            self.update_reminder()
+>>>>>>> 1eba43581c81df8180ca7e3988353b5c36267f0a
 
 root = Tk()
 reminder_gui = ReminderGUI(root)
