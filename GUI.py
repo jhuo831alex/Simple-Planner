@@ -87,6 +87,8 @@ class ReminderGUI:
 
     # delete the event after user checks the checkbox
     def removeCheckButton(self,button_num):
+        print(button_num)
+        print(self.button_lst)
         self.button_lst[button_num].destroy()
     
     # method
@@ -129,7 +131,8 @@ class ReminderGUI:
                 if hour_value != 'hr' and min_value != 'min':
                     display_text += hour_value + ':' + min_value
             
-            n = len(self.button_lst)+1
+
+            n = len(self.button_lst) + 1
             var = IntVar()
 
             #set the style of the event information displayed 
@@ -155,14 +158,10 @@ class ReminderGUI:
             for i in range(len(self.event_list)):
                 if self.event_list[i]== task:
                     self.removeCheckButton(i)   
-                    self.button_lst.pop(i)
-                    self.var_lst.pop(i)
-                    self.event_list.pop(i)
-                    self.time_lst.pop(i) 
-                    self.priority_lst.pop(i)
-                    #self.removeCheckButton(i-1)
-            
+
+
             self.update_reminder()
+
 
 root = Tk()
 reminder_gui = ReminderGUI(root)
