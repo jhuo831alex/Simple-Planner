@@ -7,7 +7,7 @@ In command line version, user can add his or her new task/event to the reminder 
 In the graphical user interface version, user can type in the task name and select date, time, and priority from the dropdown box. The user can also edit a task on the list, and the edited task will appear at the end of reminder list. When user click the check button besides the task, the task will be deleted from the reminder list.
 
 ## Installation Requirement
-Install the tkinter package in Python and clone the code before running the program.
+Install the tkinter package in Python and clone the code in final source code folder before running the program.
 
 ## Run Instructions
 In command line version, run Main.py, and simply follow the questions popped up to add, modify or check tasks.
